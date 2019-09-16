@@ -52,6 +52,9 @@ class Imbox:
         self.connection.close()
         self.connection.logout()
 
+    def list(self):
+        return self.connection.list()
+
     def check_success(self, response):
         if 'OK' in str(response):
             return True

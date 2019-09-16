@@ -11,13 +11,27 @@ username = cf.get("imap", "username")
 password = cf.get("imap", "password")
 
 
+def list_boxes():
+    '''
+    列出当前邮箱账户下有哪些邮箱目录
+    :return:
+    '''
+    imbox = Imbox(server_host,
+                  port=server_port,
+                  username=username,
+                  password=password,
+                  ssl=enable_ssl,
+                  ssl_context=None,
+                  starttls=False)
+    return imbox.list()
+
 def get_messages(folder, current_page=None, page_size=None):
     '''
     分页获取指定文件夹中的邮件（如需获取全部，current_page、page_size不设置即可）
-    :param folder: inbox、sent、drafts、deleted、junk
-    :param current_page:
+    :param folder: 取值inbox、sent、drafts、deleted、junk
+    :param current_page:取值1,2,3...
     :param page_size:
-    :return:
+    :return: json格式数据列表
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -31,11 +45,11 @@ def get_messages(folder, current_page=None, page_size=None):
 def get_unread_messages(folder, unread=True, current_page=None, page_size=None):
     '''
     分页获取指定文件夹中的未读邮件（如需获取全部，current_page、page_size不设置即可）
-    :param folder:
+    :param folder:取值inbox、sent、drafts、deleted、junk
     :param unread:
-    :param current_page:
+    :param current_page:取值1,2,3...
     :param page_size:
-    :return:
+    :return:json格式数据列表
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -49,11 +63,11 @@ def get_unread_messages(folder, unread=True, current_page=None, page_size=None):
 def get_flagged_messages(folder, flagged=True, current_page=None, page_size=None):
     '''
     分页获取指定文件夹中的星标邮件（如需获取全部，current_page、page_size不设置即可）
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: 取值inbox、sent、drafts、deleted、junk
     :param flagged:
-    :param current_page:
+    :param current_page:取值1,2,3...
     :param page_size:
-    :return:
+    :return:json格式数据列表
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -67,11 +81,11 @@ def get_flagged_messages(folder, flagged=True, current_page=None, page_size=None
 def get_date_before_messages(folder, date_str, current_page=None, page_size=None):
     '''
     分页获取指定文件夹中、指定日期之前的邮件（注意：date_str的格式必须是YYYY-mm-dd，如需获取全部，current_page、page_size不设置即可）
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: 取值inbox、sent、drafts、deleted、junk
     :param date_str:
-    :param current_page:
+    :param current_page:取值1,2,3...
     :param page_size:
-    :return:
+    :return:json格式数据列表
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -85,11 +99,11 @@ def get_date_before_messages(folder, date_str, current_page=None, page_size=None
 def get_date_after_messages(folder, date_str, current_page=None, page_size=None):
     '''
     分页获取指定文件夹中、指定日期之后的邮件（注意：date_str的格式必须是YYYY-mm-dd，如需获取全部，current_page、page_size不设置即可）
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: 取值inbox、sent、drafts、deleted、junk
     :param date_str:
-    :param current_page:
+    :param current_page:取值1,2,3...
     :param page_size:
-    :return:
+    :return:json格式数据列表
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -103,9 +117,9 @@ def get_date_after_messages(folder, date_str, current_page=None, page_size=None)
 def mark_seen_by_uids(folder, uids):
     '''
     批量设置已读，多个uid以英文逗号分隔
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: uids的原目录，取值inbox、sent、drafts、deleted、junk
     :param uids:
-    :return:
+    :return:Ture or False
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -119,9 +133,9 @@ def mark_seen_by_uids(folder, uids):
 def mark_unseen_by_uids(folder, uids):
     '''
     批量设置未读，多个uid以英文逗号分隔
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: uids的原目录，取值inbox、sent、drafts、deleted、junk
     :param uids:
-    :return:
+    :return:Ture or False
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -135,9 +149,9 @@ def mark_unseen_by_uids(folder, uids):
 def mark_flag_by_uids(folder, uids):
     '''
     批量设为星标，多个uid以英文逗号分隔
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: uids的原目录，取值inbox、sent、drafts、deleted、junk
     :param uids:
-    :return:
+    :return:Ture or False
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -151,9 +165,9 @@ def mark_flag_by_uids(folder, uids):
 def mark_unflag_by_uids(folder, uids):
     '''
     批量去掉星标，多个uid以英文逗号分隔
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: uids的原目录，取值inbox、sent、drafts、deleted、junk
     :param uids:
-    :return:
+    :return:Ture or False
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -167,10 +181,10 @@ def mark_unflag_by_uids(folder, uids):
 def move(source_folder, uids, target_folder):
     '''
     批量移动邮件，多个uid以英文逗号分隔
-    :param source_folder: inbox、sent、drafts、deleted、junk
+    :param source_folder: uids的原目录，取值inbox、sent、drafts、deleted、junk
     :param uids:
-    :param target_folder: inbox、sent、drafts、deleted、junk
-    :return:
+    :param target_folder: 目标目录，取值inbox、sent、drafts、deleted、junk
+    :return:Ture or False
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -183,10 +197,10 @@ def move(source_folder, uids, target_folder):
 
 def delete_by_uids(folder, uids):
     '''
-    批量删除，多个uid以英文逗号分隔
-    :param folder: inbox、sent、drafts、deleted、junk
+    批量删除（移到已删除），多个uid以英文逗号分隔
+    :param folder: uids的原目录，取值inbox、sent、drafts、deleted、junk
     :param uids:
-    :return:
+    :return:Ture or False
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -200,9 +214,9 @@ def delete_by_uids(folder, uids):
 def permanently_delete_by_uids(folder, uids):
     '''
     批量永久删除，多个uid以英文逗号分隔
-    :param folder: inbox、sent、drafts、deleted、junk
+    :param folder: uids的原目录，取值inbox、sent、drafts、deleted、junk
     :param uids:
-    :return:
+    :return:Ture or False
     '''
     imbox = Imbox(server_host,
                   port=server_port,
@@ -223,7 +237,11 @@ def draft(receivers, mail_subject, mail_content, cc=None, bcc=None, attachment_n
     :param bcc: 密送对象的邮箱，多个用英文逗号分隔
     :param attachment_names: 附件名称，多个用英文逗号分隔
     :param illustrate_names: 插图名称，多个用英文逗号分隔
-    :return:
+    :return:Ture or False
+
+    注意：
+        插图的名称不能是中文！！
+        正文中用<img>标签插入图片时必须遵循以下格式，例：<img src="cid:xxx.jpg">
     '''
     imbox = Imbox(server_host,
                       port=server_port,

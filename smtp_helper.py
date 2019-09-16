@@ -20,7 +20,7 @@ def send_mail(receivers, mail_subject, mail_content, cc=None, bcc=None, attachme
     :param bcc: 密送对象的邮箱，多个用英文逗号分隔
     :param attachment_names: 附件名称，多个用英文逗号分隔
     :param illustrate_names: 插图名称，多个用英文逗号分隔
-    :return:
+    :return:Ture or False
 
     注意：
         插图的名称不能是中文！！
