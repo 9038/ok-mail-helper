@@ -135,23 +135,7 @@ print(result)
 
 
 
-## 6、参考链接
-
-https://tools.ietf.org/html/rfc3501#page-49
-
-https://www.bbsmax.com/A/MAzAvPYyJ9/
-
-https://choosealicense.com/
-
-https://github.com/mjs/imapclient
-
-https://github.com/martinrusev/imbox
-
-https://cloud.tencent.com/developer/section/1368355
-
-
-
-## 7、问题和建议
+## 6、问题和建议
 
 如果有什么问题、建议、BUG都可以在这个[Issue](https://github.com/superman-stack/mail-helper/issues/1)和我讨论
 
