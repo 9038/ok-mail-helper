@@ -34,7 +34,7 @@ mail-helper是一个基于imap/smtp协议，使用python3.x开发的邮件接收
 这个工作由smtp_helper.py完成，提供以下方法（每个方法的使用及参数说明，请参考源码中的注释）：
 
 | 方法名称                                                     | 说明     |
-| ------------------------------------------------------------ | -------- |
+| :------------------------------------------------------------ | :-------- |
 | send_mail(receivers, mail_subject, mail_content, cc=None, bcc=None, attachment_names=None, illustrate_names=None) | 发送邮件 |
 
 
