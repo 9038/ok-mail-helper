@@ -11,7 +11,7 @@ mail-helper是一个基于imap/smtp协议，使用python3.x开发的邮件接收
 这个工作由imap_helper.py完成，提供以下方法（每个方法的使用及参数说明，请参考源码中的注释）：
 
 | 方法名称                                                     | 说明                                                         |
-| :------------------------------------------------------------ | :----------------------------------------------------------- |
+| :----------------------------------------------------------- | ------------------------------------------------------------ |
 | list_boxes()                                                 | 列出当前邮箱账户下有哪些邮箱目录                             |
 | get_messages(folder, current_page=None, page_size=None)      | 分页获取指定文件夹中的邮件（如需获取全部，current_page、page_size不设置即可） |
 | get_unread_messages(folder, unread=True, current_page=None, page_size=None) | 分页获取指定文件夹中的未读邮件（如需获取全部，current_page、page_size不设置即可） |
@@ -34,7 +34,7 @@ mail-helper是一个基于imap/smtp协议，使用python3.x开发的邮件接收
 这个工作由smtp_helper.py完成，提供以下方法（每个方法的使用及参数说明，请参考源码中的注释）：
 
 | 方法名称                                                     | 说明     |
-| :------------------------------------------------------------ | :-------- |
+| ------------------------------------------------------------ | -------- |
 | send_mail(receivers, mail_subject, mail_content, cc=None, bcc=None, attachment_names=None, illustrate_names=None) | 发送邮件 |
 
 
@@ -68,6 +68,8 @@ password=xxx # 这里填‘授权码’，不是密码！去邮箱设置里获�
 ## 4、使用举例
 
 ```
+# 测试前，请先去邮箱设置里开启imap/smtp，以及可获取的邮件数量设置为全部，并生成授权码！
+
 # 列出当前邮箱账户下有哪些邮箱目录
 boxes = imap_helper.list_boxes()
 print(boxes)
@@ -76,8 +78,8 @@ print(boxes)
 messages = imap_helper.get_messages('inbox')
 print(messages)
 
-# 分页获取收件箱中的邮件
-messages = imap_helper.get_messages('inbox', current_page=1, page_size=5)
+# 分页获取已发送中的邮件
+messages = imap_helper.get_messages('sent', current_page=1, page_size=5)
 print(messages)
 
 # 设置为已读，返回布尔值
@@ -135,23 +137,7 @@ print(result)
 
 
 
-## 6、参考链接
-
-https://tools.ietf.org/html/rfc3501#page-49
-
-https://www.bbsmax.com/A/MAzAvPYyJ9/
-
-https://choosealicense.com/
-
-https://github.com/mjs/imapclient
-
-https://github.com/martinrusev/imbox
-
-https://cloud.tencent.com/developer/section/1368355
-
-
-
-## 7、问题和建议
+## 6、问题和建议
 
 如果有什么问题、建议、BUG都可以在这个[Issue](https://github.com/superman-stack/mail-helper/issues/1)和我讨论
 
