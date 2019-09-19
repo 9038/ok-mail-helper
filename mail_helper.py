@@ -1,26 +1,31 @@
 from imbox.imbox import Imbox
+from smbox.smbox import Smbox
 import configparser
 
 cf = configparser.ConfigParser()
 cf.read("config.conf")
 
-server_host = cf.get("imap", "server_host")
-server_port = int(cf.get("imap", "server_port"))
-enable_ssl = True if cf.get("imap", "enable_ssl")=="True" else False
 username = cf.get("imap", "username")
 password = cf.get("imap", "password")
 
+imap_server_host = cf.get("imap", "server_host")
+imap_server_port = int(cf.get("imap", "server_port"))
+imap_enable_ssl = True if cf.get("imap", "enable_ssl") == "True" else False
+
+smtp_server_host = cf.get("smtp", "server_host")
+smtp_server_port = int(cf.get("smtp", "server_port"))
+smtp_enable_ssl = True if cf.get("smtp", "enable_ssl") == "True" else False
 
 def list_boxes():
     '''
     列出当前邮箱账户下有哪些邮箱目录
     :return:
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.list()
@@ -33,11 +38,11 @@ def get_messages(folder, current_page=None, page_size=None):
     :param page_size:
     :return: json格式数据列表
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.messages(folder=folder, current_page=current_page, page_size=page_size).page
@@ -51,11 +56,11 @@ def get_unread_messages(folder, unread=True, current_page=None, page_size=None):
     :param page_size:
     :return:json格式数据列表
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.messages(folder=folder, unread=unread, current_page=current_page, page_size=page_size).page
@@ -69,11 +74,11 @@ def get_flagged_messages(folder, flagged=True, current_page=None, page_size=None
     :param page_size:
     :return:json格式数据列表
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.messages(folder=folder, flagged=flagged, current_page=current_page, page_size=page_size).page
@@ -87,11 +92,11 @@ def get_date_before_messages(folder, date_str, current_page=None, page_size=None
     :param page_size:
     :return:json格式数据列表
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.messages(folder=folder, date__lt=date_str, current_page=current_page, page_size=page_size).page
@@ -105,11 +110,11 @@ def get_date_after_messages(folder, date_str, current_page=None, page_size=None)
     :param page_size:
     :return:json格式数据列表
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.messages(folder=folder, date__gt=date_str, current_page=current_page, page_size=page_size).page
@@ -121,11 +126,11 @@ def mark_seen_by_uids(folder, uids):
     :param uids:
     :return:Ture or False
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.mark_seen(folder, uids)
@@ -137,11 +142,11 @@ def mark_unseen_by_uids(folder, uids):
     :param uids:
     :return:Ture or False
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.mark_unseen(folder, uids)
@@ -153,11 +158,11 @@ def mark_flag_by_uids(folder, uids):
     :param uids:
     :return:Ture or False
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.mark_flag(folder, uids)
@@ -169,11 +174,11 @@ def mark_unflag_by_uids(folder, uids):
     :param uids:
     :return:Ture or False
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.mark_unflag(folder, uids)
@@ -186,11 +191,11 @@ def move(source_folder, uids, target_folder):
     :param target_folder: 目标目录，取值inbox、sent、drafts、deleted、junk
     :return:Ture or False
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.move(source_folder, uids, target_folder)
@@ -202,11 +207,11 @@ def delete_by_uids(folder, uids):
     :param uids:
     :return:Ture or False
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.delete(folder, uids)
@@ -218,11 +223,11 @@ def permanently_delete_by_uids(folder, uids):
     :param uids:
     :return:Ture or False
     '''
-    imbox = Imbox(server_host,
-                  port=server_port,
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
                   username=username,
                   password=password,
-                  ssl=enable_ssl,
+                  ssl=imap_enable_ssl,
                   ssl_context=None,
                   starttls=False)
     return imbox.permanently_delete(folder, uids)
@@ -243,11 +248,35 @@ def draft(receivers, mail_subject, mail_content, cc=None, bcc=None, attachment_n
         插图的名称不能是中文！！
         正文中用<img>标签插入图片时必须遵循以下格式，例：<img src="cid:xxx.jpg">
     '''
-    imbox = Imbox(server_host,
-                      port=server_port,
-                      username=username,
-                      password=password,
-                      ssl=enable_ssl,
-                      ssl_context=None,
-                      starttls=False)
+    imbox = Imbox(imap_server_host,
+                  port=imap_server_port,
+                  username=username,
+                  password=password,
+                  ssl=imap_enable_ssl,
+                  ssl_context=None,
+                  starttls=False)
     imbox.draft(receivers, mail_subject, mail_content, cc, bcc, attachment_names, illustrate_names)
+
+def send_mail(receivers, mail_subject, mail_content, cc=None, bcc=None, attachment_names=None,
+              illustrate_names=None):
+    '''
+    发送邮件
+    :param receivers: 接收对象的邮箱，多个用英文逗号分隔
+    :param mail_subject: 邮件标题
+    :param mail_content: 邮件正文（html格式或plain格式）
+    :param cc: 抄送对象的邮箱，多个用英文逗号分隔
+    :param bcc: 密送对象的邮箱，多个用英文逗号分隔
+    :param attachment_names: 附件名称，多个用英文逗号分隔
+    :param illustrate_names: 插图名称，多个用英文逗号分隔
+    :return:Ture or False
+    注意：
+        插图的名称不能是中文！！
+        正文中用<img>标签插入图片时必须遵循以下格式，例：<img src="cid:xxx.jpg">
+    '''
+    smbox = Smbox(smtp_server_host,
+                  port=smtp_server_port,
+                  username=username,
+                  password=password,
+                  ssl=smtp_enable_ssl,
+                  ssl_context=None, starttls=False)
+    return smbox.send_mail(username, receivers, mail_subject, mail_content, cc, bcc, attachment_names, illustrate_names)
