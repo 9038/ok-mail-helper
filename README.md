@@ -1,8 +1,8 @@
-# mail-helper
+# ok-mail-helper
 
 ![](https://img.shields.io/badge/python-3.x-blue.svg) ![](https://img.shields.io/badge/version-1.0.0-brightgreen.svg) ![](https://img.shields.io/badge/license-MIT-000000.svg)
 
-mail-helper是一个基于imap/smtp协议邮件客户端项目，使用python3.x开发，支持邮件接收并解析、邮件发送，用户可在自己的项目中直接引入、开箱即用，或者结合flask等web框架轻松做成http接口供前端调用、把邮箱管理集成到自己的系统中，亦可通过注册中心（Eureka、Consul、Nacos等）的加持，做成微服务供其他系统调用。
+ok-mail-helper是一个基于imap/smtp协议邮件客户端项目，使用python3.x开发，支持邮件接收并解析、邮件发送，用户可在自己的项目中直接引入、开箱即用，或者结合flask等web框架轻松做成http接口供前端调用、把邮箱管理集成到自己的系统中，亦可通过注册中心（Eureka、Consul、Nacos等）的加持，做成微服务供其他系统调用。
 
 
 
