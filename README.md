@@ -50,14 +50,21 @@ enable_ssl=True
 server_host=smtp.qq.com
 server_port=465
 enable_ssl=True
+
+# 如果对外提供HTTP接口，则需要配置以下两项，详看web_service.py
+[webservice]
+appid=123456 # 唯一校验码
+port=1234 # 端口号
 ```
 
 
 
 ## 3、使用举例
 
-```
+```python
 # 测试前，请先去邮箱设置里开启imap/smtp，以及可获取的邮件数量设置为全部，并生成授权码！
+
+import mail_helper
 
 # 列出当前邮箱账户下有哪些邮箱目录
 boxes = mail_helper.list_boxes()

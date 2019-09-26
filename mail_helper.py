@@ -5,8 +5,8 @@ import configparser
 cf = configparser.ConfigParser()
 cf.read("config.conf")
 
-username = cf.get("imap", "username")
-password = cf.get("imap", "password")
+username = cf.get("base", "username")
+password = cf.get("base", "password")
 
 imap_server_host = cf.get("imap", "server_host")
 imap_server_port = int(cf.get("imap", "server_port"))
