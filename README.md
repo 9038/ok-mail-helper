@@ -130,7 +130,7 @@ print(result)
 
 如果有什么问题、建议、BUG都可以在这个[Issue](https://github.com/superman-stack/mail-helper/issues/1)和我讨论
 
-或者也可以在gitter上交流：[![Gitter](https://badges.gitter.im/superman-projects/mail-helper.svg)](https://gitter.im/superman-projects/mail-helper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+或者也可以在gitter上交流：[![Gitter](https://badges.gitter.im/superman-projects/ok-mail-helper.svg)](https://gitter.im/superman-projects/ok-mail-helper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 当然也您可以加入新建的QQ群与我讨论：101934706
 
