@@ -26,7 +26,7 @@ app = Flask(__name__)
 @app.route('/get_messages', methods=["POST"])
 def get_messages():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -34,14 +34,15 @@ def get_messages():
             page_size = int(request.form.get("page_size"))
             page_data = mail_helper.get_messages(folder=folder, current_page=current_page, page_size=page_size)
             return jsonify({'code': 0, 'msg': 'success', 'data': page_data})
-    except:
+    except Exception as e:
+        e.with_traceback()
         return jsonify({'code': 1, 'msg': 'failed'})
 
 
 @app.route('/get_unread_messages', methods=["POST"])
 def get_unread_messages():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -56,7 +57,7 @@ def get_unread_messages():
 @app.route('/get_flagged_messages', methods=["POST"])
 def get_flagged_messages():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -71,7 +72,7 @@ def get_flagged_messages():
 @app.route('/get_date_before_messages', methods=["POST"])
 def get_date_before_messages():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -87,7 +88,7 @@ def get_date_before_messages():
 @app.route('/get_date_after_messages', methods=["POST"])
 def get_date_after_messages():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -103,7 +104,7 @@ def get_date_after_messages():
 @app.route('/mark_seen_by_uids', methods=["POST"])
 def mark_seen_by_uids():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -117,7 +118,7 @@ def mark_seen_by_uids():
 @app.route('/mark_unseen_by_uids', methods=["POST"])
 def mark_unseen_by_uids():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -131,7 +132,7 @@ def mark_unseen_by_uids():
 @app.route('/mark_flag_by_uids', methods=["POST"])
 def mark_flag_by_uids():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -145,7 +146,7 @@ def mark_flag_by_uids():
 @app.route('/mark_unflag_by_uids', methods=["POST"])
 def mark_unflag_by_uids():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -159,7 +160,7 @@ def mark_unflag_by_uids():
 @app.route('/move', methods=["POST"])
 def move():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             source_folder = request.form.get("source_folder")
@@ -174,7 +175,7 @@ def move():
 @app.route('/delete_by_uids', methods=["POST"])
 def delete_by_uids():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -188,7 +189,7 @@ def delete_by_uids():
 @app.route('/permanently_delete_by_uids', methods=["POST"])
 def permanently_delete_by_uids():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             folder = request.form.get("folder")
@@ -202,7 +203,7 @@ def permanently_delete_by_uids():
 @app.route('/upload_files', methods=["POST"])
 def upload_files():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             # type为0表示附件，1表示插图
@@ -226,7 +227,7 @@ def upload_files():
 @app.route('/send_message', methods=["POST"])
 def send_message():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             receivers = request.form.get("receivers")
@@ -245,7 +246,7 @@ def send_message():
 @app.route('/save_draft', methods=["POST"])
 def save_draft():
     try:
-        if webservice_appid != request.args.get('appid'):
+        if webservice_appid != request.form.get('appid'):
             return jsonify({'code': 1, 'msg': 'failed'})
         else:
             receivers = request.form.get("receivers")

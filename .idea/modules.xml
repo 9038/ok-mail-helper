@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ok-mail-helper.iml" filepath="$PROJECT_DIR$/.idea/ok-mail-helper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ok-system-helper/.idea/ok-system-helper.iml" filepath="$PROJECT_DIR$/../ok-system-helper/.idea/ok-system-helper.iml" />
     </modules>
   </component>
 </project>

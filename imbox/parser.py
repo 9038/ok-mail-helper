@@ -11,6 +11,7 @@ from imbox.utils import str_encode, str_decode
 import operator as op
 import configparser
 import os
+from email import header
 
 cf = configparser.ConfigParser()
 cf.read("config.conf")
@@ -46,6 +47,20 @@ def decode_mail_header(value, default_charset='ascii'):
 
         return ''.join(headers)
 
+def decode_mail_header_backup(s):
+    """
+    Decode a header value into a unicode string.
+    """
+    ret = []
+    for b, e in header.decode_header(re.sub(r'\n\s+', ' ', s)):
+        if e:
+            if e.lower() == 'gb2312':
+                e = 'gb18030'
+            b = b.decode(e)
+        elif isinstance(b, bytes):
+            b = b.decode('ascii')
+        ret.append(b)
+    return ''.join(ret)
 
 def get_mail_addresses(message, header_name):
     """
@@ -78,7 +93,6 @@ def decode_param(param):
                 v = ''.join(value_results)
     return name, v
 
-
 def parse_attachment(message_part):
     # Check again if this is a valid attachment
     content_disposition = message_part.get("Content-Disposition", None)
@@ -97,7 +111,7 @@ def parse_attachment(message_part):
                 'size': len(file_data),
                 # 'content': io.BytesIO(file_data)
             }
-            filename = message_part.get_param('name')
+            filename = decode_mail_header(str(message_part.get_param('name')))
             if filename:
                 attachment['filename'] = filename
                 if not os.path.exists(attachment_path):
