@@ -8,7 +8,7 @@ IMAPClient==2.1.0
 itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
-psutil==5.6.3
+psutil==5.6.6
 py-eureka-client==0.6.0
 PyEmail==0.0.1
 PyMySQL==0.9.3
